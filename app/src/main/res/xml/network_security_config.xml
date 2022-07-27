@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+ <!--  <base-config cleartextTrafficPermitted="true" />-->
+
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">reqres.in</domain>
+        <domain includeSubdomains="true">https://reqres.in/api/</domain>
+        <pin-set>
+            <pin digest="SHA-256">9Pacxtmctlq2Y73orFOOXXXXXXXXXXZhBXXXXXXXXXX=</pin>
+            <pin digest="SHA-256">9Pacxtmctlq2Y73orFOOXXXXXXXXXXZhBXXXXXXXXXX=</pin>
+        </pin-set>
+    </domain-config>
+
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+
+
+</network-security-config>
