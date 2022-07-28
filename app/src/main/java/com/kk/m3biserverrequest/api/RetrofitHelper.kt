@@ -27,7 +27,7 @@ object RetrofitHelper {
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
     // Create a Custom Interceptor to apply Headers application wide
-    val headerInterceptor = object: Interceptor {
+    val headerInterceptor = object : Interceptor {
 
         override fun intercept(chain: Interceptor.Chain): Response {
 
@@ -36,7 +36,7 @@ object RetrofitHelper {
             request = request.newBuilder()
                 .addHeader("x-device-type", Build.DEVICE)
                 .addHeader("Accept-Language", Locale.getDefault().language)
-
+                .addHeader("Content-Type","application/json")
                 .build()
 
             val response = chain.proceed(request)
@@ -44,29 +44,21 @@ object RetrofitHelper {
         }
     }
 
-/*    val certificatePinner = CertificatePinner.Builder()
+
+    val certificatePinner = CertificatePinner.Builder()
         .add(
             "https://reqres.in/",
-            "sha256/ZCOF65ADBWPDK8P2V7+mqodtvbsTRR/D74FCU+CEEA="
+            "sha256/5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w="
         )
-        .build()*/
-
-/*    val inputStream = resources.openRawResource(R.raw.mycer)
-    val keyStoreType = KeyStore.getDefaultType()
-    val keyStore :KeyStore= KeyStore.getInstance(keyStoreType)
-    keyStore.load(inputStream, null)
-
-    val tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm()
-    val trustManagerFactory = TrustManagerFactory.getInstance(tmfAlgorithm)
-    trustManagerFactory.init(keyStore)*/
+        .build()
 
 
-    // Create OkHttp Client
     private val okHttp = OkHttpClient.Builder()
-        .callTimeout(50000, TimeUnit.SECONDS)
+        .callTimeout(6000, TimeUnit.SECONDS)
+        .certificatePinner(certificatePinner)
         .addInterceptor(headerInterceptor)
         .addInterceptor(logger)
-        //.sslSocketFactory(sslContext.getSocketFactory())
+
 
     //return retrofit instance
     fun getInstance(): Retrofit {
@@ -77,4 +69,7 @@ object RetrofitHelper {
             .client(okHttp.build())
             .build()
     }
+
+
+
 }

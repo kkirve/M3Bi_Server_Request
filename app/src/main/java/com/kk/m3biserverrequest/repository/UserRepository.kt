@@ -10,6 +10,7 @@ import com.kk.m3biserverrequest.models.UserList
 class UserRepository(private val userService: UserService) //if need database add one more param
 {
 
+    //USER Repository
     //mutable live data possible to change values from it
     private val userLiveData = MutableLiveData<UserList>()
 
@@ -30,8 +31,7 @@ class UserRepository(private val userService: UserService) //if need database ad
     }
 
 
-//Quote data
-
+    //Quote data for testing purpose
     //mutable live data possible to change values from it
     private val quoteLiveData = MutableLiveData<QuotesList>()
 

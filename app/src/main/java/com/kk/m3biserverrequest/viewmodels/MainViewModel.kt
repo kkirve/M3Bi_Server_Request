@@ -24,10 +24,10 @@ class MainViewModel(private val userRepository: UserRepository) : ViewModel() {
         }*/
     }
 
-    val users :LiveData<UserList>
-    get() = userRepository.users
+    val users: LiveData<UserList>
+        get() = userRepository.users
 
-    val quotes :LiveData<QuotesList>
+    val quotes: LiveData<QuotesList>
         get() = userRepository.quotes
 
 

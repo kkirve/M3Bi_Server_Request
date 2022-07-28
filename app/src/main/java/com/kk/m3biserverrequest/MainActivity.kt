@@ -28,24 +28,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //test adapter
-//        val recyclerView = findViewById<RecyclerView>(R.id.userList)
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val adapter = UserAdapter()
-//            val p1 = Data("avtar", "email", "Swarup", 1, "Kirve")
-//            val p2 = Data("avtar", "email", "Kavya", 2, "Kirve")
-//            val p3 = Data("avtar", "email", "Kiran", 3, "Kirve")
-//
-//            adapter.submitList(listOf(p1, p2, p3))
-//
-//            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-//            recyclerView.setHasFixedSize(true)
-//            recyclerView.adapter = adapter
-//        }
+        val recyclerView = findViewById<RecyclerView>(R.id.userList)
+        //  lifecycleScope.launch(Dispatchers.IO) {
+        val adapter = UserAdapter()
+        //test data for adapter
+        val p1 = Data("avtar", "email", "Swarupa", 1, "Kirve")
+        val p2 = Data("avtar", "email", "Kavya", 2, "Kirve")
+        val p3 = Data("avtar", "email", "Kiran", 3, "Kirve")
+
+        adapter.submitList(listOf(p1, p2, p3))
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
+
 
         //improvements :possible to define in application class
         //below object will access main view model
         val userService = RetrofitHelper.getInstance().create(UserService::class.java)
-
         val repository = UserRepository(userService)
 
         mainViewModel =
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, TAG + " " + it.data.toString())
         })
 
+        //for testing quot data
 /*        mainViewModel.quotes.observe(this, Observer {
             Log.d(TAG,TAG+" "+it.results.toString())
         })*/

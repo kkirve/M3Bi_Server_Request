@@ -13,7 +13,7 @@
         <domain includeSubdomains="true">reqres.in</domain>
         <domain includeSubdomains="true">https://reqres.in/api/</domain>
         <pin-set>
-            <pin digest="SHA-256">9Pacxtmctlq2Y73orFOOXXXXXXXXXXZhBXXXXXXXXXX=</pin>
+            <pin digest="SHA-256">5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=</pin>
             <pin digest="SHA-256">9Pacxtmctlq2Y73orFOOXXXXXXXXXXZhBXXXXXXXXXX=</pin>
         </pin-set>
     </domain-config>

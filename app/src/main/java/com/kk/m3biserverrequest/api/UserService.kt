@@ -26,9 +26,9 @@ interface UserService {
     @GET("/users")
     suspend fun getUsers(@Query("page") page_no: Int): Response<UserList>
 
-    //quotable.io/quotes?page=1
+    //testing quote data
     //https://quotable.io/quotes?page=1
     @GET("/quotes")
-    suspend fun getQuotes(@Query("page")page_no:Int):Response <QuotesList>
+    suspend fun getQuotes(@Query("page") page_no: Int): Response<QuotesList>
 
 }
