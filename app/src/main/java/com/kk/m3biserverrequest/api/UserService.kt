@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
+import retrofit2.http.Streaming
 
 interface UserService {
 
@@ -20,9 +21,10 @@ interface UserService {
 //        "Accept-Encoding: gzip, deflate, br",
 //        "Connection: keep-alive")
 
-    @Headers(
+/*    @Headers(
         "Content-Type:application/json"
-    )
+    )*/
+    @Streaming
     @GET("/users")
     suspend fun getUsers(@Query("page") page_no: Int): Response<UserList>
 

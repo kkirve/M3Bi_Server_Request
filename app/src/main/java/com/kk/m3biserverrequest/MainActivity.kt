@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //push with mahadev
         //test adapter
         val recyclerView = findViewById<RecyclerView>(R.id.userList)
         //  lifecycleScope.launch(Dispatchers.IO) {

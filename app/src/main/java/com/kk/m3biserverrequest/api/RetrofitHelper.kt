@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import okio.Buffer
+import java.nio.charset.Charset
 import java.security.KeyStore
 import java.util.*
 import javax.net.ssl.SSLContext
@@ -44,6 +46,29 @@ object RetrofitHelper {
         }
     }
 
+    val ChunksInterceptor    = object :Interceptor {
+
+        val Utf8Charset = Charset.forName ("UTF-8")
+
+        override fun intercept (chain: Interceptor.Chain): Response {
+            val originalResponse = chain.proceed (chain.request ())
+            val responseBody = originalResponse.body ()
+            val source = responseBody!!.source ()
+
+            val buffer = Buffer () // We create our own Buffer
+
+            // Returns true if there are no more bytes in this source
+            while (!source.exhausted ()) {
+                val readBytes = source.read (buffer, Long.MAX_VALUE) // We read the whole buffer
+                val data = buffer.readString (Utf8Charset)
+
+                println ("Read: $readBytes bytes")
+                println ("Content: \n $data \n")
+            }
+
+            return originalResponse
+        }
+    }
 
     val certificatePinner = CertificatePinner.Builder()
         .add(
@@ -52,12 +77,18 @@ object RetrofitHelper {
         )
         .build()
 
-
-    private val okHttp = OkHttpClient.Builder()
+    private val okHttp1 = OkHttpClient.Builder()
         .callTimeout(6000, TimeUnit.SECONDS)
         .certificatePinner(certificatePinner)
         .addInterceptor(headerInterceptor)
         .addInterceptor(logger)
+
+
+    private val okHttp = OkHttpClient.Builder()
+        .certificatePinner(certificatePinner)
+        .addInterceptor(ChunksInterceptor)
+        .addInterceptor(logger)
+
 
 
     //return retrofit instance
