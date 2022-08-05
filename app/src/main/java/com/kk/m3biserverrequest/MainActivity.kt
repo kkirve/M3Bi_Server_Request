@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.users.observe(this, Observer {
             Log.d(TAG, TAG + " " + it.data.toString())
+
+            adapter.submitList(it.data)
+
         })
 
         //for testing quot data

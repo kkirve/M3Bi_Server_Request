@@ -22,7 +22,7 @@ import javax.net.ssl.TrustManagerFactory
 
 object RetrofitHelper {
 
-    private const val BASE_URL = "https://reqres.in/api/"
+    private const val BASE_URL = "https://reqres.in/"
     private const val BASE_URL_Quote = "https://quotable.io/"
 
     // Create Logger
@@ -72,21 +72,21 @@ object RetrofitHelper {
 
     val certificatePinner = CertificatePinner.Builder()
         .add(
-            "https://reqres.in/",
+            "https://reqres.in/api/",
             "sha256/5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w="
         )
         .build()
 
     private val okHttp1 = OkHttpClient.Builder()
-        .callTimeout(6000, TimeUnit.SECONDS)
+
         .certificatePinner(certificatePinner)
         .addInterceptor(headerInterceptor)
         .addInterceptor(logger)
 
 
     private val okHttp = OkHttpClient.Builder()
+        .callTimeout(6000, TimeUnit.SECONDS)
         .certificatePinner(certificatePinner)
-        .addInterceptor(ChunksInterceptor)
         .addInterceptor(logger)
 
 

@@ -25,7 +25,7 @@ interface UserService {
         "Content-Type:application/json"
     )*/
     @Streaming
-    @GET("/users")
+    @GET("/api/users")
     suspend fun getUsers(@Query("page") page_no: Int): Response<UserList>
 
     //testing quote data
