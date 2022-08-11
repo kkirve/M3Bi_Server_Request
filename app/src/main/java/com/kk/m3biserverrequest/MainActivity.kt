@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //push with mahadev
         //test adapter
         val recyclerView = findViewById<RecyclerView>(R.id.userList)
         //  lifecycleScope.launch(Dispatchers.IO) {
@@ -52,8 +51,9 @@ class MainActivity : AppCompatActivity() {
             ViewModelProvider(this, MainViewModelFactory(repository)).get(MainViewModel::class.java)
 
         mainViewModel.users.observe(this, Observer {
-            Log.d(TAG, TAG + " " + it.data.toString())
 
+            Log.d(TAG, TAG + " " + it.data.toString())
+            //add to adapter
             adapter.submitList(it.data)
 
         })
